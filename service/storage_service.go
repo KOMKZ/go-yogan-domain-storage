@@ -180,6 +180,35 @@ func (s *StorageService) GetFileInfo(ctx context.Context, id uint) (*model.FileM
 	return file, nil
 }
 
+// Paginate file metadata list
+func (s *StorageService) Paginate(
+	ctx context.Context,
+	page,
+	pageSize int,
+	category,
+	businessType,
+	keyword,
+	sortBy,
+	sortOrder string,
+) ([]model.FileMetadata, int64, int64, error) {
+	if page <= 0 {
+		page = 1
+	}
+	if pageSize <= 0 {
+		pageSize = 10
+	}
+	if pageSize > 100 {
+		pageSize = 100
+	}
+
+	files, total, totalSize, err := s.repo.Paginate(ctx, page, pageSize, category, businessType, keyword, sortBy, sortOrder)
+	if err != nil {
+		return nil, 0, 0, storageerrors.ErrDatabaseError.Wrap(err)
+	}
+
+	return files, total, totalSize, nil
+}
+
 // GetFileInfoByStorageID 根据存储ID获取文件信息
 func (s *StorageService) GetFileInfoByStorageID(ctx context.Context, storageID string) (*model.FileMetadata, error) {
 	file, err := s.repo.FindByStorageID(ctx, storageID)

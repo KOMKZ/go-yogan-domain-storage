@@ -56,7 +56,7 @@ func (d *mockDriver) Delete(filePath string) error {
 }
 
 func (d *mockDriver) GetURL(filePath string) string { return d.getURLVal }
-func (d *mockDriver) Exists(filePath string) bool    { return d.existsVal }
+func (d *mockDriver) Exists(filePath string) bool   { return d.existsVal }
 
 func (d *mockDriver) GetReader(filePath string) (io.ReadCloser, error) {
 	if d.readerErr != nil {
@@ -68,16 +68,16 @@ func (d *mockDriver) GetReader(filePath string) (io.ReadCloser, error) {
 // --- mock repo ---
 
 type mockRepo struct {
-	mu           sync.RWMutex
-	files        map[uint]*model.FileMetadata
-	byStorageID  map[string]*model.FileMetadata
-	nextID       uint
-	createErr    error
-	findByIDErr  error
-	findBySIDErr error
-	deleteErr    error
+	mu             sync.RWMutex
+	files          map[uint]*model.FileMetadata
+	byStorageID    map[string]*model.FileMetadata
+	nextID         uint
+	createErr      error
+	findByIDErr    error
+	findBySIDErr   error
+	deleteErr      error
 	deleteBySIDErr error
-	paginateErr  error
+	paginateErr    error
 }
 
 func newMockRepo() *mockRepo {
@@ -160,17 +160,54 @@ func (r *mockRepo) DeleteByStorageID(ctx context.Context, storageID string) erro
 	return nil
 }
 
-func (r *mockRepo) Paginate(ctx context.Context, page, pageSize int, category, businessType string) ([]model.FileMetadata, int64, error) {
+func (r *mockRepo) Paginate(
+	ctx context.Context,
+	page,
+	pageSize int,
+	category,
+	businessType,
+	keyword,
+	sortBy,
+	sortOrder string,
+) ([]model.FileMetadata, int64, int64, error) {
 	if r.paginateErr != nil {
-		return nil, 0, r.paginateErr
+		return nil, 0, 0, r.paginateErr
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	var list []model.FileMetadata
+	var totalSize int64
 	for _, f := range r.files {
+		if category != "" && f.Category != category {
+			continue
+		}
+		if businessType != "" && f.BusinessType != businessType {
+			continue
+		}
+		if keyword != "" {
+			if !strings.Contains(f.OriginalFilename, keyword) && !strings.Contains(f.StoredFilename, keyword) && !strings.Contains(f.StorageID, keyword) {
+				continue
+			}
+		}
 		list = append(list, *f)
+		totalSize += f.FileSize
 	}
-	return list, int64(len(list)), nil
+	if sortBy == "file_size" {
+		for i := 0; i < len(list); i++ {
+			for j := i + 1; j < len(list); j++ {
+				if sortOrder == "asc" {
+					if list[i].FileSize > list[j].FileSize {
+						list[i], list[j] = list[j], list[i]
+					}
+				} else {
+					if list[i].FileSize < list[j].FileSize {
+						list[i], list[j] = list[j], list[i]
+					}
+				}
+			}
+		}
+	}
+	return list, int64(len(list)), totalSize, nil
 }
 
 var _ repository.StorageRepository = (*mockRepo)(nil)
@@ -179,8 +216,8 @@ var _ repository.StorageRepository = (*mockRepo)(nil)
 
 type mockURLDriver struct {
 	mockDriver
-	uploadFromURLResult string
-	uploadFromURLErr    error
+	uploadFromURLResult    string
+	uploadFromURLErr       error
 	uploadFromReaderResult string
 	uploadFromReaderErr    error
 }

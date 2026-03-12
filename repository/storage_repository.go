@@ -15,5 +15,14 @@ type StorageRepository interface {
 	FindByPath(ctx context.Context, filePath string) (*model.FileMetadata, error)
 	DeleteByID(ctx context.Context, id uint) error
 	DeleteByStorageID(ctx context.Context, storageID string) error
-	Paginate(ctx context.Context, page, pageSize int, category, businessType string) ([]model.FileMetadata, int64, error)
+	Paginate(
+		ctx context.Context,
+		page,
+		pageSize int,
+		category,
+		businessType,
+		keyword,
+		sortBy,
+		sortOrder string,
+	) ([]model.FileMetadata, int64, int64, error)
 }

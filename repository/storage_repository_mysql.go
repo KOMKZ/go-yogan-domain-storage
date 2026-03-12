@@ -65,27 +65,76 @@ func (r *StorageMySQLRepository) DeleteByStorageID(ctx context.Context, storageI
 	return r.db.WithContext(ctx).Where("storage_id = ?", storageID).Delete(&model.FileMetadata{}).Error
 }
 
-func (r *StorageMySQLRepository) Paginate(ctx context.Context, page, pageSize int, category, businessType string) ([]model.FileMetadata, int64, error) {
+func (r *StorageMySQLRepository) Paginate(
+	ctx context.Context,
+	page,
+	pageSize int,
+	category,
+	businessType,
+	keyword,
+	sortBy,
+	sortOrder string,
+) ([]model.FileMetadata, int64, int64, error) {
 	var files []model.FileMetadata
 	var total int64
+	var totalSize int64
 
-	query := r.db.WithContext(ctx).Model(&model.FileMetadata{})
-
-	if category != "" {
-		query = query.Where("category = ?", category)
+	buildQuery := func() *gorm.DB {
+		query := r.db.WithContext(ctx).Model(&model.FileMetadata{})
+		if category != "" {
+			query = query.Where("category = ?", category)
+		}
+		if businessType != "" {
+			query = query.Where("business_type = ?", businessType)
+		}
+		if keyword != "" {
+			like := "%" + keyword + "%"
+			query = query.Where(
+				"original_filename LIKE ? OR stored_filename LIKE ? OR storage_id LIKE ?",
+				like,
+				like,
+				like,
+			)
+		}
+		return query
 	}
-	if businessType != "" {
-		query = query.Where("business_type = ?", businessType)
+
+	orderBy := "id DESC"
+	if sortOrder == "asc" {
+		switch sortBy {
+		case "created_at":
+			orderBy = "created_at ASC"
+		case "file_size":
+			orderBy = "file_size ASC"
+		case "id":
+			orderBy = "id ASC"
+		}
+	} else {
+		switch sortBy {
+		case "created_at":
+			orderBy = "created_at DESC"
+		case "file_size":
+			orderBy = "file_size DESC"
+		case "id":
+			orderBy = "id DESC"
+		}
 	}
 
+	query := buildQuery()
 	if err := query.Count(&total).Error; err != nil {
-		return nil, 0, err
+		return nil, 0, 0, err
+	}
+
+	query = buildQuery()
+	if err := query.Select("COALESCE(SUM(file_size), 0)").Scan(&totalSize).Error; err != nil {
+		return nil, 0, 0, err
 	}
 
 	offset := (page - 1) * pageSize
-	if err := query.Offset(offset).Limit(pageSize).Order("id DESC").Find(&files).Error; err != nil {
-		return nil, 0, err
+	query = buildQuery()
+	if err := query.Offset(offset).Limit(pageSize).Order(orderBy).Find(&files).Error; err != nil {
+		return nil, 0, 0, err
 	}
 
-	return files, total, nil
+	return files, total, totalSize, nil
 }
