@@ -49,6 +49,12 @@ func DefaultConfig() *Config {
 				MaxSize:      5,
 				AllowedTypes: []string{".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg"},
 			},
+			"export": {
+				Visibility:   "pri",
+				Path:         "exports",
+				MaxSize:      50,
+				AllowedTypes: []string{".csv", ".xlsx"},
+			},
 		},
 	}
 }

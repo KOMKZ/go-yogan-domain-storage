@@ -1,0 +1,38 @@
+{"level":"info","time":"2026-03-13T21:30:39.217+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:30:39.218+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:30:39.218+0800","caller":"service/storage_service.go:144","msg":"file deleted","module":"storage_test","app_name":"","file_id":1}
+{"level":"info","time":"2026-03-13T21:30:39.218+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:30:39.218+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:30:39.218+0800","caller":"service/storage_service.go:167","msg":"file deleted","module":"storage_test","app_name":"","storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:30:39.218+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:30:39.218+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:30:39.218+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:30:39.218+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:30:39.218+0800","caller":"service/storage_service.go:291","msg":"file uploaded from URL","module":"storage_test","app_name":"","source_url":"https://tmp.example.com/img.png","permanent_url":"https://oss.example.com/file.png"}
+{"level":"info","time":"2026-03-13T21:30:39.218+0800","caller":"service/storage_service.go:311","msg":"file uploaded from reader","module":"storage_test","app_name":"","permanent_url":"https://oss.example.com/merged.png"}
+{"level":"info","time":"2026-03-13T21:30:39.219+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:30:39.219+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"warn","time":"2026-03-13T21:30:39.219+0800","caller":"service/storage_service.go:136","msg":"delete physical file failed","module":"storage_test","app_name":"","path":"/tmp/file.jpg","error":"fs error"}
+{"level":"info","time":"2026-03-13T21:30:39.219+0800","caller":"service/storage_service.go:144","msg":"file deleted","module":"storage_test","app_name":"","file_id":1}
+{"level":"info","time":"2026-03-13T21:30:39.219+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"warn","time":"2026-03-13T21:30:39.219+0800","caller":"service/storage_service.go:159","msg":"delete physical file failed","module":"storage_test","app_name":"","path":"/tmp/file.jpg","error":"fs error"}
+{"level":"info","time":"2026-03-13T21:30:39.219+0800","caller":"service/storage_service.go:167","msg":"file deleted","module":"storage_test","app_name":"","storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:31:44.201+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:144","msg":"file deleted","module":"storage_test","app_name":"","file_id":1}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:167","msg":"file deleted","module":"storage_test","app_name":"","storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:291","msg":"file uploaded from URL","module":"storage_test","app_name":"","source_url":"https://tmp.example.com/img.png","permanent_url":"https://oss.example.com/file.png"}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:311","msg":"file uploaded from reader","module":"storage_test","app_name":"","permanent_url":"https://oss.example.com/merged.png"}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"warn","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:136","msg":"delete physical file failed","module":"storage_test","app_name":"","path":"/tmp/file.jpg","error":"fs error"}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:144","msg":"file deleted","module":"storage_test","app_name":"","file_id":1}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:111","msg":"file uploaded","module":"storage_test","app_name":"","file_id":1,"storage_id":"mock:test@file.jpg"}
+{"level":"warn","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:159","msg":"delete physical file failed","module":"storage_test","app_name":"","path":"/tmp/file.jpg","error":"fs error"}
+{"level":"info","time":"2026-03-13T21:31:44.203+0800","caller":"service/storage_service.go:167","msg":"file deleted","module":"storage_test","app_name":"","storage_id":"mock:test@file.jpg"}
